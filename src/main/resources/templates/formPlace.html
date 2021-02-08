@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="page1">
+
+<head>
+
+<meta charset="utf-8">
+
+<title>Form Place</title>
+</head>
+<body>
+	<div layout:fragment="contenu">
+		<div class="container mt-5">
+		<div class=" card col-md-6 offset-md-3">
+			<div class="card-header bg-secondary text-white" th:if="${place.id==null}">Formulaire
+				d'ajout</div>
+			<div class="card-header bg-secondary text-white" th:if="${place.id!=null}">Formulaire
+				de modification</div>
+			<div class="card-body">
+				<form method="post" th:action="@{savePlace}">
+					<div class="form-group">
+						<input type="hidden" name="id" class="form-control"
+							th:value="${place.id}">
+							 <label class="control-label">Num</label>
+						<input type="text" name="numero" class="form-control"
+							th:value="${place.numero}"> 
+							<span th:errors=${place.numero} class="text-danger"></span>
+							<div>
+							<label class="control-label">longitude</label>
+						<input type="text" name="longitude" class="form-control"
+							th:value="${place.longitude}">
+							</div> <label
+							class="control-label">latitude</label>
+							 <input type="text"
+							name="latitude" class="form-control"
+							th:value="${place.latitude}">
+							 <label
+							class="control-label">altitude</label>
+							 <input type="text"
+							name="altitude" class="form-control"
+							th:value="${place.altitude}">
+							 
+							 <label class="control-label">Salle</label> 
+				 		 <select th:field = "${place.salle.id}" class="form-control form-control-sm" id="id">
+
+                            <option value="">salle</option>
+                            <option th:each="sal:${salle}"
+                                    th:value="${sal.id}"
+                                    th:text="${sal.name}"
+                                 
+                                    
+                            >
+                            </option>
+                            
+                        </select> 
+                        
+
+					</div>
+					<button class="btn btn-outline-secondary offset-md-4" type="submit" style="width:34%;">Enregistrer</button>
+
+
+				</form>
+			</div>
+		</div>
+		</div>
+	</div>
+</body>
+</html>

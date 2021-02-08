@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      >
+       
+      
+       
+<head> 
+ 
+<meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css">
+   
+  <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+  <script src="/webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<title>Villes</title>
+
+
+</head>
+<body>
+
+<div class="container mt-5">
+
+
+<div class="card">
+<div class="card-header">Villes</div>
+<div class="card-body"></div>
+ <form method="get" th:action="@{listeVille}">
+<div class="form-group">
+<label>nom_ville</label>
+<input type="text" name="keyword" th:value="${keyword}">
+<button class="btn btn-success">chercher</button>
+<a class="btn btn-success" th:href="@{formVille}">ajouter ville</a>
+
+</div>
+</form> 
+
+<table class="table">
+<tr>
+<th>Id</th>
+<th>Nom_ville</th>
+<th>longitude</th>
+<th>altitude</th>
+<th>latitude</th>
+
+
+<th>Operations</th>
+</tr>
+<tr th:each="v:${listeVille}">
+  <td th:text="${v.id}"></td>
+  <td th:text="${v.name}"></td>
+  <td th:text="${v.longitude}"></td>
+  <td th:text="${v.altitude}"></td>
+  <td th:text="${v.latitude}"></td>
+ 
+  
+ 
+  <td><a onclick="return confirm('Etes-vous sur de supprimer')" th:href="@{supprimerVille(id=${v.id})}" class="btn btn-danger"> Delete</a>
+   <a th:href="@{modifierVille(id=${v.id})}" class="btn btn-success"> Modifier</a>  </td></tr>
+</table>
+ <ul class="nav nav-pills">
+<li th:each="page,statuts:${pages}">
+<a  th:class="${statuts.index==currentPage?'btn btn-primary':'btn'}"
+   th:href="@{listeVille(page=${statuts.index})}" th:text="${statuts.index}">
+</a>
+</li>
+</ul> 
+</div>
+</div>
+</div>
+
+</body>
+</html>

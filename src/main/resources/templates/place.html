@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	layout:decorator="page1">
+
+<head>
+
+<meta charset="utf-8">
+
+<title>Places</title>
+</head>
+<body>
+	<div layout:fragment="contenu">
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+							
+								<div class="card-header" style="background-color: #E0E6F8">
+
+
+									<h4  class="card-title"  >Places</h4>
+									  <form class="navbar-form">
+									            
+              <div  class="input-group" >
+                <input class="col-md-2 form-control" type="search" placeholder="Name" aria-label="Search" name="keyword">&nbsp;&nbsp;
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> &nbsp;&nbsp;
+    <a class="btn btn-primary" th:href="@{listPlace}" >Refresh</a>
+              </div>
+            </form>
+
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table">
+											<thead class=" text-primary">
+												<tr>
+													<th>Id</th>
+													<th>Num</th>
+													<th>longitude</th>
+													<th>altitude</th>
+													<th>latitude</th>
+													<th>Salle</th>
+													
+													<th sec:authorize="hasRole('ROLE_MANAGER')" > &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;Action</th>
+																										<th></th>
+													
+													<th sec:authorize="hasRole('ROLE_MANAGER')"><a style="display: inline-block" class="nav-link"
+														th:href="@{formPlace}"> <i class="material-icons"
+															style="color: purple">add</i>
+													</a></th>
+
+
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="p:${listPlace}">
+													<td th:text="${p.id}"></td>
+													<td th:text="${p.numero}"></td>
+													<td th:text="${p.longitude}"></td>
+													<td th:text="${p.altitude}"></td>
+													<td th:text="${p.latitude}"></td>
+													
+													<td th:text="${p.salle.name}"></td>
+
+
+
+
+
+													<td sec:authorize="hasRole('ROLE_MANAGER')" ><a
+														onclick="return confirm('Etes-vous sur de supprimer')"
+														th:href="@{deletePlace(id=${p.id},keyword=${keyword},page=${currentPage},size=${size})}"
+														class="btn btn-outline-warning"> Delete</a>
+													&nbsp; &nbsp;&nbsp;
+														<a th:href="@{editplace(id=${p.id},keyword=${keyword},page=${currentPage})}"
+														class="btn btn-outline-warning"> Modifier</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<ul class="nav nav-pills">
+ <li th:each="page,status:${pages}">
+                                                    <a th:class="${status.index==currentPage ?'btn btn-primary':'btn'}"
+                                                        class="btn"
+                                                        th:href="@{listPlace(page=${status.index},keyword=${keyword},size=${size})}"
+                                                        th:text="${status.index}"></a>
+                                                </li>
+</ul>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+                
+     
+    </div>
+  
+
+</body>
+
+</html>

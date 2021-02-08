@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	layout:decorator="page1">
+
+<head>
+
+<meta charset="utf-8">
+
+<title>Form Cinema</title>
+</head>
+<body>
+	<div layout:fragment="contenu">
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+							
+								<div class="card-header" style="background-color: #E0E6F8">
+
+
+									<h4  class="card-title"  >Cinemas</h4>
+									  <form class="navbar-form">
+									            
+              <div  class="input-group" >
+                <input class="col-md-2 form-control" type="search" placeholder="Name" aria-label="Search" name="keyword">&nbsp;&nbsp;
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> &nbsp;&nbsp;
+    <a class="btn btn-primary" th:href="@{listeCinema}" >Refresh</a>
+              </div>
+            </form>
+
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table">
+											<thead class=" text-primary">
+												<tr>
+													<th>Id</th>
+													<th>Nom</th>
+													<th>longitude</th>
+													<th>altitude</th>
+													<th>latitude</th>
+													<th>Nombre Salles</th>
+													<th>Ville</th>
+													<th sec:authorize="hasRole('ROLE_MANAGER')" > &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;Action</th>
+																										<th></th>
+													
+													<th sec:authorize="hasRole('ROLE_MANAGER')"><a style="display: inline-block" class="nav-link"
+														th:href="@{formCinema}"> <i class="material-icons"
+															style="color: purple">add</i>
+													</a></th>
+
+
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="c:${listeCinema}">
+													<td th:text="${c.id}"></td>
+													<td th:text="${c.name}"></td>
+													<td th:text="${c.longitude}"></td>
+													<td th:text="${c.altitude}"></td>
+													<td th:text="${c.latitude}"></td>
+													<td th:text="${c.nombreSalles}"></td>
+													<td th:text="${c.ville.name}"></td>
+
+
+
+
+
+													<td sec:authorize="hasRole('ROLE_MANAGER')" ><a
+														onclick="return confirm('Etes-vous sur de supprimer')"
+														th:href="@{supprimerCinema(id=${c.id})}"
+														class="btn btn-outline-warning"> Delete</a>
+													&nbsp; &nbsp;&nbsp;
+														<a th:href="@{modifierCinema(id=${c.id},keyword=${keyword},page=${currentPage})}"
+														class="btn btn-outline-warning"> Modifier</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<ul class="nav nav-pills">
+ <li th:each="page,status:${pages}">
+                                                    <a th:class="${status.index==currentPage ?'btn btn-primary':'btn'}"
+                                                        class="btn"
+                                                        th:href="@{listeCinema(page=${status.index},keyword=${keyword},size=${size})}"
+                                                        th:text="${status.index}"></a>
+                                                </li>
+</ul>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+                
+     
+    </div>
+  
+
+</body>
+
+</html>

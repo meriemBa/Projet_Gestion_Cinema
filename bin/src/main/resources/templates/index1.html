@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+<head>
+<meta charset="utf-8">
+<title>Patients</title>
+  <link rel="stylesheet" href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+  <script src="/webjars/bootstrap/4.1.3/css/bootstrap.min.js"></script>
+</head>
+<body>
+
+<!-- style="background-color: #e3f2fd;"-->
+<nav class="navbar navbar-expand-sm bg-secondary navbar-dark" >
+  <a class="navbar-brand" th:href="@{Home}">Cinema Hub</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{logout}">Home</a>
+      </li>
+    </ul>
+  </div>
+  <ul class="navbar-nav">
+
+    <li class="nav-item active">
+      <a class="nav-link" th:href="@{formPatients}">Log out</a>
+    </li>
+    
+
+  </ul>
+</nav>
+
+
+
+
+
+
+
+<section layout:fragment="pageContent">
+
+</section>
+
+
+
+</body>
+</html>

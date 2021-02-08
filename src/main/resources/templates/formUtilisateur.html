@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="page1">
+	
+<head>
+
+<meta charset="utf-8">
+
+<title>Form Utilisateur</title>
+</head>
+<body>
+	<div layout:fragment="contenu">
+	<div class="container mt-5">
+
+		<div class=" card col-md-6 offset-md-3">
+		<div class="card-header bg-secondary text-white" th:if="${utilisateur.id==null}">Formulaire
+				d'ajout</div>
+			<div class="card-header bg-secondary text-white" th:if="${utilisateur.id!=null}">Formulaire
+				de modification</div>
+		
+			<div class="card-body">
+				<form method="post" th:action="@{saveUtilisateur}">
+					<div class="form-group">
+						<input type="hidden" name="id" class="form-control"
+							th:value="${utilisateur.id}">
+							 <label class="control-label">Username</label>
+						<input type="text" name="name" class="form-control"
+							th:value="${utilisateur.name}"> 
+							 <label class="control-label">Password</label>
+						<input type="text" name="password" class="form-control"
+							th:value="${utilisateur.password}"> 
+							 <label class="control-label">Active</label> 
+							<select th:field = "${utilisateur.active}" class="form-control form-control-sm" id="active" name="active">
+							    <option value="0">0</option>
+							    <option value="1">1</option>
+							  
+							</select>
+							
+							 <label class="control-label">Role</label> 
+				 		 <select th:field = "${utilisateur.role.id}" class="form-control form-control-sm" id="id">
+                           
+                            <option th:each="r:${role}"
+                                    th:value="${r.id}"
+                                    th:text="${r.role}"
+                                 
+                                    
+                            >
+                            </option>
+                            
+                        </select> 
+                        
+
+					</div>
+					<button class="btn btn-outline-secondary offset-md-4" type="submit" style="width:34%;">Enregistrer</button>
+
+
+				</form>
+			</div>
+		</div>
+		</div>
+	
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

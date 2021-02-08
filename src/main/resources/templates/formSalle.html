@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="page1">
+
+<head>
+
+<meta charset="utf-8">
+
+<title>Form Salle</title>
+</head>
+<body>
+	<div layout:fragment="contenu">
+	
+		<div class="container mt-5">
+
+		<div class=" card col-md-6 offset-md-3">
+			<div  class="card-header bg-secondary text-white" th:if="${salle.id==null}">Formulaire
+				d'ajout</div>
+			<div  class="card-header bg-secondary text-white" th:if="${salle.id!=null}">Formulaire
+				de modification</div>
+			<div class="card-body">
+				<form method="post" th:action="@{saveSalle}">
+					<div class="form-group">
+						<input type="hidden" name="id" class="form-control"
+							th:value="${salle.id}">
+							 <label class="control-label">Name</label>
+						<input type="text" name="name" class="form-control"
+							th:value="${salle.name}">
+							<span th:errors=${salle.name} class="text-danger"></span> 
+							<div>
+							<label class="control-label">Nombre de places</label>
+						<input type="text" name="nombrePlaces" class="form-control"
+							th:value="${salle.nombrePlaces}"></div>
+								 <label class="control-label">Cinema</label> 
+                  
+				 		 <select th:field = "${salle.cinema.id}" class="form-control form-control-sm" id="id">
+
+                            <option value="">Cinema</option>
+                            <option th:each="c:${cinema}"
+                                    th:value="${c.id}"
+                                    th:text="${c.name}"
+                                 
+                                    
+                            >
+                            </option>
+                            
+                        </select> 
+							 
+					</div>
+										<button class="btn btn-outline-secondary offset-md-4" type="submit" style="width:34%;">Enregistrer</button>
+
+
+				</form>
+			</div>
+		</div>
+		</div>
+	</div>
+</body>
+</html>

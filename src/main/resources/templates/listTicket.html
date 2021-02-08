@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	layout:decorator="page1">
+
+<head>
+
+<meta charset="utf-8">
+
+<title>Film</title>
+</head>
+<body>
+	<div layout:fragment="contenu">
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+							
+								<div class="card-header" style="background-color: #E0E6F8">
+
+
+                                        <h4 class="card-title">Tickets</h4>
+                                        <form class="navbar-form">
+
+                                            <div class="input-group">
+                                               
+                                               
+                                                <a class="btn btn-primary" th:href="@{listTicket}">Refresh</a>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class=" text-primary">
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Nom_Client</th>
+                                                        <th>Code_paiement</th>
+                                                        <th>Price</th>
+                                                        <th>Reserve</th>
+                                                        <th>Place</th>
+                                                        <th>Projection</th>
+                                                        
+                                                        <th sec:authorize="hasRole('ROLE_MANAGER')" >Action</th>
+
+
+                                                        
+
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr th:each="t:${listTicket}">
+                                             
+                                                        <td th:text="${t.id}"></td>
+                                                        <td th:text="${t.nameClient}"></td>
+                                                        <td th:text="${t.codePayement}"></td>
+                                                        <td th:text="${t.price}"></td>
+                                                        <td th:text="${t.reserve}"></td>
+                                                        
+                                                        <td th:text="${t.place.numero}"></td>
+                                                        <td th:text="${t.projection.dateProjection}"></td>
+                                                       
+
+
+
+
+
+                                                        <td sec:authorize="hasRole('ROLE_MANAGER')" >
+                                                            <a onclick="return confirm('etes vous sure de vouloire supprimer')"
+                                                                class="btn btn-outline-warning"
+                                                                th:href="@{deleteTicket(id=${t.id},keyword=${keyword},page=${currentPage},size=${size})}">
+                                                                Delete</a>
+                                                           &nbsp;&nbsp;&nbsp;
+
+														
+													</td>
+
+                                                        </td>
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <ul class="nav nav-pills">
+                                                <li th:each="page,status:${pages}">
+                                                    <a th:class="${status.index==currentPage ?'btn btn-primary':'btn'}"
+                                                        class="btn"
+                                                        th:href="@{listTicket(page=${status.index},keyword=${keyword},size=${size})}"
+                                                        th:text="${status.index}"></a>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+</body>
+
+</html>

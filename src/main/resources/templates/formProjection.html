@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html   xmlns:th="http://www.thymeleaf.org" 
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+		layout:decorator="page1">
+
+<head>
+<meta charset="utf-8">
+<title>Form Projection</title>
+</head>
+<body>
+<div layout:fragment="contenu">
+	
+	<div class="container mt-5">
+			
+				<div class="card col-md-6 offset-md-3">
+				
+				
+					<div class="card-header bg-secondary text-white" align="center" style="color: blue; font-weight: bold;"
+					 th:if="${projectionFilm.id==null}">Formulaire de saisie d'un nouveau film</div>
+					<div class="card-header" align="center" style="color: blue; font-weight: bold;"
+					 th:if="${projectionFilm.id!=null}">Formulaire de modification de film</div>
+				
+							
+			<div class="card-body">
+				<form method="post" th:action="@{saveProjection}"  >
+					<div class="form-group">
+					<input type="hidden" name="id" class="form-control" th:value="${projectionFilm.id}">
+					<label class="control-label">Date Projection</label>
+						<input type="date" name="dateProjection" class="form-control"
+							th:value="${projectionFilm.dateProjection}">
+						<span th:errors=${projectionFilm.dateProjection} class="text-danger"></span>
+							
+							
+					</div>
+					<div class="form-group">
+							 <label class="control-label">Prix</label>
+						<input type="text" name="prix" class="form-control"
+							th:value="${projectionFilm.prix}"> 
+					</div>
+					<div class="form-group">					
+						 <label class="control-label">Films</label> 
+				 		 <select th:field = "${projectionFilm.film.id}" class="form-control form-control-sm" id="id">
+
+                            <option value="">Films</option>
+                            <option th:each="f:${film}"
+                                    th:value="${f.id}"
+                                    th:text="${f.titre}" >
+                            </option>
+                         </select> 
+                         
+             		  </div>
+             		  <div class="form-group">					
+						 <label class="control-label">Salles</label> 
+				 		 <select th:field = "${projectionFilm.salle.id}" class="form-control form-control-sm" id="id">
+
+                            <option value="">Salles</option>
+                            <option th:each="f:${salle}"
+                                    th:value="${f.id}"
+                                    th:text="${f.name}" >
+                            </option>
+                         </select> 
+                         
+             		  </div>
+             		  <div class="form-group">					
+						 <label class="control-label">Seances</label> 
+				 		 <select th:field = "${projectionFilm.seance.id}" class="form-control form-control-sm" id="id">
+
+                            <option value="">Seances</option>
+                            <option th:each="f:${seance}"
+                                    th:value="${f.id}"
+                                    th:text="${f.heureDebut}" >
+                            </option>
+                         </select> 
+                         
+             		  </div>
+							<button class="btn btn-outline-secondary offset-md-4" type="submit" style="width:34%;">Enregistrer</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		
+	</div>
+</body>
+</html>
+
+
+
+
+
+

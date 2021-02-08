@@ -1,0 +1,47 @@
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css">
+
+<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container mt-5">
+
+		<div class=" card col-md-6 offset-md-3">
+			<div class="card-header" th:if="${salle.id==null}">Formulaire
+				d'ajout</div>
+			<div class="card-header" th:if="${salle.id!=null}">Formulaire
+				de modification</div>
+			<div class="card-body">
+				<form method="post" th:action="@{saveSalle}">
+					<div class="form-group">
+						<input type="hidden" name="id" class="form-control"
+							th:value="${salle.id}">
+							 <label class="control-label">Name</label>
+						<input type="text" name="name" class="form-control"
+							th:value="${salle.name}"> 
+							<label class="control-label">Nombre de places</label>
+						<input type="text" name="nombrePlaces" class="form-control"
+							th:value="${salle.nombrePlaces}">
+						
+							 
+					</div>
+					<div class="form-row text-center">
+						<div class="col-12">
+							<button type="submit" th:if="${salle.id==null}"
+								class="btn btn-success">Ajouter</button>
+							<button type="submit" th:if="${salle.id!=null}"
+								class="btn btn-success">modifier</button>
+
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

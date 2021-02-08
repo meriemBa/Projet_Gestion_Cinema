@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+ xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+ >
+
+<head>
+   <meta charset="utf-8" />
+  <link rel="stylesheet" href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+  <script src="/webjars/bootstrap/4.1.3/css/bootstrap.min.js"></script>
+  <title> Dashboard </title>
+  <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+</head>
+
+<body class="">
+  <div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+      <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-normal">
+         
+        </a></div>
+      <div class="sidebar-wrapper" style="background-color: #FBEFFB">
+        <ul class="nav">
+          <li class="nav-item  ">
+            <a class="nav-link" th:href="@{/displayBarGraph}">
+              <i class="material-icons" style="color:purple">dashboard</i>
+              <p style="color:purple">Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" th:href="@{listeCinema}">
+              <i class="material-icons" style="color:purple">content_paste</i>
+              <p style="color:purple">Cinemas</p>
+            </a>
+          </li>
+          <li class="nav-item active ">
+            <a class="nav-link" th:href="@{listeVille}">
+              <i class="material-icons" style="color:purple">content_paste</i>
+             	 <p style="color:purple">Villes</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" th:href="@{listeseance}">
+              <i class="material-icons" style="color:purple">content_paste</i>
+              <p style="color:purple">Seances</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" th:href="@{listTicket}">
+              <i class="material-icons" style="color:purple">content_paste</i>
+              <p style="color:purple">Tickets</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" th:href="@{listeSalle}">
+              <i class="material-icons" style="color:purple">content_paste</i>
+              <p style="color:purple">Salles</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" th:href="@{listFilms}">
+             <i class="material-icons" style="color:purple">content_paste</i>
+              <p style="color:purple">Films</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" th:href="@{listPlace}">
+         <i class="material-icons" style="color:purple">content_paste</i>
+              <p style="color:purple">Places</p>
+            </a>
+          </li>
+          <li class="nav-item active-pro ">
+            <a class="nav-link" th:href="@{listProjections}">
+         <i class="material-icons" style="color:purple">content_paste</i>
+              <p style="color:purple">Projections</p>
+            </a>
+          </li>
+           <li class="nav-item active-pro ">
+            <a class="nav-link" th:href="@{listCategory}">
+               <i class="material-icons" style="color:purple">content_paste</i>
+              <p style="color:purple">Categories</p>
+            </a>
+          </li>
+           <li sec:authorize="hasRole('ROLE_ADMIN')"  class="nav-item active-pro ">
+            <a class="nav-link" th:href="@{listUsers}">
+               <i class="material-icons" style="color:purple">content_paste</i>
+              <p style="color:purple">Utilisateurs</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:;"></a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+      <!--       <form class="navbar-form">
+              <div class="input-group no-border">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> &nbsp;&nbsp;
+    <a class="btn btn-primary" th:href="@{index}" >Refresh</a>
+              </div>
+            </form> -->
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="http://localhost:4200"> 
+                	 
+                  <i class="material-icons">dashboard</i>
+				
+                </a>
+            
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">notifications</i>
+                  <span class="notification">5</span>
+
+                </a>
+               
+              </li>
+            
+              <li class="nav-item dropdown">
+               <!--   <a class="nav-link" href="#" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                 <a class="nav-link" href="#" id="navbardrop" data-toggle="dropdown">
+			        <span sec:authorize="isAuthenticated()">
+			        	  <span sec:authentication="name">  </span>
+			        	   <a sec:authorize="isAuthenticated()"  th:href="@{logout}">Logout</a>
+			        	 
+			        	  <!--  <span>
+				      		  <a  style="color:blue; margin-left:4%"sec:authorize="isAnonymous()"class="dropdown-item" th:href="@{login}">Login</a>
+						      <a style="color:blue; margin-left:0%"  sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{logout}">Logout</a>
+						 	</span> -->
+			        	  
+			        </span>
+			        <span sec:authorize="!isAuthenticated()">
+			        	  <span>[Connect]</span>
+			        	 <a  sec:authorize="isAnonymous()" th:href="@{login}">Login</a>
+			        
+			        	  
+			        </span>
+			      <!--    <div class="dropdown">
+			      		  <a  style="color:blue; margin-left:4%"sec:authorize="isAnonymous()"class="dropdown-item" th:href="@{login}">Login</a>
+					      <a style="color:blue; margin-left:0%"  sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{logout}">Logout</a>
+					 </div> -->
+			      </a>
+			      
+			<!--          <button class="dropbtn"  sec:authorize="!isAuthenticated()">
+			        	  <span>[Connect]</span>
+			         <i class="fa fa-caret-down"></i>
+				    </button>
+                 <div class="dropdown">
+				    
+				    <div class="dropdown-content">
+				      <a  sec:authorize="isAnonymous()"class="dropdown-item" th:href="@{login}">Login</a>
+				      <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{logout}">Logout</a>
+				    
+				    </div>
+				  </div>  -->
+           		
+              </li>
+              </ul>
+        
+          </div>
+        </div>
+      </nav>
+
+<section layout:fragment="contenu"></section>
+                
+      <footer class="footer fixed-bottom">
+        <div class="container-fluid">
+          <nav class="float-left">
+         
+                <a href="https://www.creative-tim.com">
+              &copy;     KML Team</a>
+             
+          </nav>
+          <div class="copyright float-right">
+            
+  Made with <i class="material-icons"  style="color:purple">favorite</i> by KML
+        &copy;
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+  
+</body>
+
+</html>

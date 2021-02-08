@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="page1">
+
+<head>
+
+<meta charset="utf-8">
+
+<title>Form Utilisateur</title>
+</head>
+<body>
+	<div layout:fragment="contenu">
+			
+		 <div class="container mt-5">	
+				<div class="card col-md-6 offset-md-3">
+					<div class="card-header bg-secondary text-white" align="center" style="color: blue; font-weight: bold;"
+					 th:if="${user.id==null}">Formulaire d'ajout des utilisateurs</div>
+					<div class="card-header" align="center" style="color: blue; font-weight: bold;"
+					 th:if="${user.id!=null}">Formulaire de modification </div>			
+					<div class="card-body">
+						<form method="post" th:action="@{saveUser}">
+							<div class="form-group">
+								<input type="hidden" name="id" class="form-control" th:value="${user.id}">
+								<label class="control-label">Username</label>
+								<input type="text" name="username" class="form-control"
+								th:value="${user.username}">
+								<label class="control-label">Email</label>
+								<input type="email" name="email" class="form-control"
+								th:value="${user.email}">
+								<label class="control-label">Password</label>
+								<input type="password" name="password" class="form-control"
+								th:value="${user.password}">
+								<label class="control-label">Active</label>
+								<select  name="active"  class="form-control" th:value="${user.active}">
+									<option value=true>1</option>
+									<option value=false>0</option>
+								</select>
+								<label class="control-label">Role</label> 
+				 		 		<select th:field = "${user.role.id}" class="form-control form-control-sm" id="id">
+                        	  		  <option th:each="r:${role}" th:value="${r.id}" th:text="${r.roles}"> </option>     
+                      		    </select> 
+							</div>
+							<button class="btn btn-outline-secondary offset-md-4" type="submit" style="width:34%;">Enregistrer</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	layout:decorator="page1">
+
+<head>
+
+<meta charset="utf-8">
+
+<title>Ville</title>
+</head>
+<body>
+	<div layout:fragment="contenu">
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+							
+								<div class="card-header" style="background-color: #F6CEF5">
+
+									<h4 class="card-title">Villes</h4>
+		<form class="navbar-form">
+							<div class="input-group no-border">
+								<input class="col-md-2 form-control"  type="search"
+									placeholder="Name" aria-label="Search" name="keyword">&nbsp;&nbsp;
+								<button class="btn btn-outline-success my-2 my-sm-0"
+									type="submit">Search</button>
+								&nbsp;&nbsp; <a class="btn btn-primary" th:href="@{listeVille}">Refresh</a>
+							</div>
+						</form>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table">
+											<thead class=" text-primary">
+												<tr>
+													<th>Id</th>
+													<th>Nom_ville</th>
+													<th>longitude</th>
+													<th>altitude</th>
+													<th>latitude</th>
+
+													<th sec:authorize="hasRole('ROLE_MANAGER')" >Action</th>
+													<th></th>
+													<th sec:authorize="hasRole('ROLE_MANAGER')" ><a style="display: inline-block" class="nav-link"
+														th:href="@{formVille}"> <i class="material-icons"
+															style="color: purple">add</i>
+													</a></th>
+
+
+												</tr>
+											</thead>
+											<tbody>
+												
+
+	<tr th:each="v:${listeVille}">
+				<td th:text="${v.id}"></td>
+				<td th:text="${v.name}"></td>
+				<td th:text="${v.longitude}"></td>
+				<td th:text="${v.altitude}"></td>
+				<td th:text="${v.latitude}"></td>
+
+
+
+					<td sec:authorize="hasRole('ROLE_MANAGER')" ><a onclick="return confirm('Etes-vous sur de supprimer')"
+					th:href="@{supprimerVille(id=${v.id})}" class="btn btn-outline-warning">
+						Delete</a>  
+					&nbsp;&nbsp;&nbsp;
+						<a th:href="@{modifierVille(id=${v.id})}"
+					class="btn btn-outline-warning"> Modifier</a>
+					</td>
+			</tr>
+												
+											</tbody>
+										</table>
+										<ul class="nav nav-pills" >
+			<li th:each="page,statuts:${pages}"><a 
+				th:class="${statuts.index==currentPage?'btn btn-primary':'btn'}"
+				th:href="@{listeVille(page=${statuts.index})}"
+				th:text="${statuts.index}"> </a></li>
+		</ul>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+			<footer class="footer fixed-bottom">
+				<div class="container-fluid">
+					<nav class="float-left">
+
+						<a href="https://www.creative-tim.com"> &copy; KML Team</a>
+
+					</nav>
+					<div class="copyright float-right">
+
+						Made with <i class="material-icons" style="color: purple">favorite</i>
+						by KML &copy;
+					</div>
+				</div>
+			</footer>
+		</div>
+
+
+</body>
+
+</html>
+
+

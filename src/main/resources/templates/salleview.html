@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	layout:decorator="page1">
+
+<head>
+
+<meta charset="utf-8">
+
+<title>Salle</title>
+</head>
+<body>
+	<div layout:fragment="contenu">
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+							
+								<div class="card-header" style="background-color: #E0E6F8">
+
+									<h4 class="card-title" >Salles</h4>
+  <form class="navbar-form">
+              <div class="input-group no-border">
+                <input class="col-md-2 form-control" type="search" placeholder="Name" aria-label="Search" name="keyword"> &nbsp;&nbsp;
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> &nbsp;&nbsp;
+    <a class="btn btn-primary" th:href="@{listeSalle}" >Refresh</a>
+              </div>
+            </form>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table">
+											<thead class=" text-primary">
+												<tr>
+												<th>Id</th>
+<th>Name</th>
+<th>Nombre de places</th>
+<th>Cinema</th>
+
+													<th></th><th></th>
+													
+													
+													<th sec:authorize="hasRole('ROLE_MANAGER')" ><a style="display: inline-block" class="nav-link"
+														th:href="@{formSalle}"> <i class="material-icons"
+															style="color: purple">add</i>
+													</a></th>
+
+
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="s:${listeSalle}">
+  <td th:text="${s.id}"></td>
+  <td th:text="${s.name}"></td>
+  <td th:text="${s.nombrePlaces}"></td>
+  <td th:text="${s.cinema.name}"></td>
+  
+
+
+
+
+ <td sec:authorize="hasRole('ROLE_MANAGER')" ><a onclick="return confirm('Etes-vous sur de supprimer')" th:href="@{supprimerSalle(id=${s.id})}" 
+ class="btn btn-outline-warning"> Delete</a> &nbsp;&nbsp;&nbsp;
+  <a th:href="@{modifierSalle(id=${s.id})}" class="btn btn-outline-warning"> Modifier</a> 
+  </td>
+  </tr>
+</table>
+ <ul class="nav nav-pills">
+<li th:each="page,statuts:${pages}">
+<a  th:class="${statuts.index==currentPage?'btn btn-primary':'btn'}"
+   th:href="@{listeSalle(page=${statuts.index})}" th:text="${statuts.index}">
+</a>
+</li>
+</ul> 
+
+												
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+                
+      <footer class="footer fixed-bottom">
+        <div class="container-fluid">
+          <nav class="float-left">
+         
+                <a href="https://www.creative-tim.com">
+              &copy;     KML Team</a>
+             
+          </nav>
+          <div class="copyright float-right">
+            
+  Made with <i class="material-icons"  style="color:purple">favorite</i> by KML
+        &copy;
+          </div>
+        </div>
+      </footer>
+    </div>
+
+
+</body>
+
+</html>

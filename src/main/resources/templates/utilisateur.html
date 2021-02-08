@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="page1">
+
+<head>
+
+<meta charset="utf-8">
+
+<title>utilisateur</title>
+</head>
+<body>
+	<div layout:fragment="contenu">
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+							
+								<div class="card-header card-header-primary">
+
+
+									<h4  class="card-title"  >Utilisateurs</h4>
+									  <form class="navbar-form">
+									            
+              <div  class="input-group" >
+                <input class="col-md-2 form-control" type="search" placeholder="Name" aria-label="Search" name="keyword">&nbsp;&nbsp;
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> &nbsp;&nbsp;
+    <a class="btn btn-primary" th:href="@{listeUtilisateur}" >Refresh</a>
+              </div>
+            </form>
+
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table">
+											<thead class=" text-primary">
+												<tr>
+													<th>Id</th>
+													<th>Username</th>
+													<th>Password</th>
+													<th>Active</th>
+													
+													<th>role</th>
+													<th></th>
+																										<th></th>
+													
+													<th><a style="display: inline-block" class="nav-link"
+														th:href="@{formUtilisateur}"> <i class="material-icons"
+															style="color: purple">add</i>
+													</a></th>
+
+
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="u:${listeUtilisateur}">
+													<td th:text="${u.id}"></td>
+													<td th:text="${u.name}"></td>
+													<td th:text="${u.password}"></td>
+													<td th:text="${u.active}"></td>
+													<td th:text="${u.role.role}"></td>
+													
+
+
+
+
+
+													<td><a
+														onclick="return confirm('Etes-vous sur de supprimer')"
+														th:href="@{supprimerUtilisateur(id=${u.id})}"
+														class="btn btn-outline-warning"> Delete</a></td>
+														<td>
+														<a th:href="@{modifierUtilisateur(id=${u.id},keyword=${keyword},page=${currentPage})}"
+														class="btn btn-outline-warning"> Modifier</a></td>
+														<td></td>
+												</tr>
+											</tbody>
+										</table>
+										<ul class="nav nav-pills">
+<li th:each="page,status:${pages}">
+<a th:class="${status.index==currentPage ?'btn btn-primary':'btn'}" class="btn" th:href="@{index(page=${status.index},keyword=${keyword},size=${size})}" th:text="${status.index}"></a>
+</li>
+</ul>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+                
+     
+    </div>
+  
+
+</body>
+
+</html>

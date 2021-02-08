@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	layout:decorator="page1">
+
+<head>
+
+<meta charset="utf-8">
+
+<title>Seance</title>
+</head>
+<body>
+	<div layout:fragment="contenu">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+
+							<div class="card-header" style="background-color: #E0E6F8">
+
+								<h4 class="card-title">Seances</h4>
+								<form class="navbar-form">
+									<div class="input-group no-border">
+										 <a class="btn btn-primary"
+											th:href="@{listeseance}">Refresh</a>
+									</div>
+								</form>
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table">
+										<thead class=" text-primary">
+											<tr>
+												<th>Id</th>
+												<th>Heure_Début</th>
+												
+
+
+												<th sec:authorize="hasRole('ROLE_MANAGER')"><a
+													style="display: inline-block" class="nav-link"
+													th:href="@{formSeance}"> <i class="material-icons"
+														style="color: purple">add</i>
+												</a></th>
+
+
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="se:${listeseance}">
+												<td th:text="${se.id}"></td>
+												<td th:text="${se.heureDebut}"></td>
+												
+
+
+
+
+
+												<td sec:authorize="hasRole('ROLE_MANAGER')"><a
+													onclick="return confirm('Etes-vous sur de supprimer')"
+													th:href="@{supprimerseance(id=${se.id})}"
+													class="btn btn-outline-warning"> Delete</a>
+													&nbsp;&nbsp;&nbsp; <a
+													th:href="@{modifierseance(id=${se.id})}"
+													class="btn btn-outline-warning"> Modifier</a></td>
+											</tr>
+									</table>
+									<ul class="nav nav-pills">
+										<li th:each="page,statuts:${pages}"><a
+											th:class="${statuts.index==currentPage?'btn btn-primary':'btn'}"
+											th:href="@{listeseance(page=${statuts.index})}"
+											th:text="${statuts.index}"> </a></li>
+									</ul>
+
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+
+
+</body>
+
+</html>

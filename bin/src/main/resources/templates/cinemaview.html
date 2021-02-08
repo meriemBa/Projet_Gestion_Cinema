@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      >
+       
+      
+       
+<head> 
+ 
+<meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css">
+   
+  <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+  <script src="/webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<title>Cinemas</title>
+
+
+</head>
+<body>
+
+<div class="container mt-5">
+
+
+<div class="card">
+<div class="card-header">Cinemas</div>
+<div class="card-body"></div>
+ <form method="get" th:action="@{listeCinema}">
+<div class="form-group">
+<label>nom_cinema</label>
+<input type="text" name="keyword" th:value="${keyword}">
+<button class="btn btn-success">chercher</button>
+<a class="btn btn-success" th:href="@{formCinema}">ajouter Cinema</a>
+
+</div>
+</form> 
+
+<table class="table">
+<tr>
+<th>Id</th>
+<th>Nom</th>
+<th>longitude</th>
+<th>altitude</th>
+<th>latitude</th>
+<th>Nombre Salles</th>
+
+
+<th>Operations</th>
+</tr>
+<tr th:each="c:${listeCinema}">
+  <td th:text="${c.id}"></td>
+  <td th:text="${c.name}"></td>
+  <td th:text="${c.longitude}"></td>
+  <td th:text="${c.altitude}"></td>
+  <td th:text="${c.latitude}"></td>
+  <td th:text="${c.nombreSalles}"></td>
+
+  
+  
+  
+ 
+  <td><a onclick="return confirm('Etes-vous sur de supprimer')" th:href="@{supprimerCinema(id=${c.id})}" class="btn btn-danger"> Delete</a>
+   <a th:href="@{modifierCinema(id=${c.id})}" class="btn btn-success"> Modifier</a>  </td></tr>
+</table>
+ <ul class="nav nav-pills">
+<li th:each="page,statuts:${pages}">
+<a  th:class="${statuts.index==currentPage?'btn btn-primary':'btn'}"
+   th:href="@{listeCinema(page=${statuts.index})}" th:text="${statuts.index}">
+</a>
+</li>
+</ul> 
+</div>
+</div>
+</div>
+
+</body>
+</html>

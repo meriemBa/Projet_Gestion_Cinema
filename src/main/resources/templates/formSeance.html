@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="page1">
+
+<head>
+
+<meta charset="utf-8">
+
+<title>Form Seance</title>
+</head>
+<body>
+	<div layout:fragment="contenu">
+		<div class="container mt-5">
+		<div class=" card col-md-6 offset-md-3">
+			<div class="card-header bg-secondary text-white" th:if="${seance.id==null}">Formulaire
+				d'ajout</div>
+			<div class="card-header bg-secondary text-white" th:if="${seance.id!=null}">Formulaire
+				de modification</div>
+			<div class="card-body">
+				<form method="post" th:action="@{saveseance}">
+					<div class="form-group">
+						<input type="hidden" name="id" class="form-control"
+							th:value="${seance.id}">
+							 <label class="control-label">Heure_Début</label>
+						<input type="text" name="heureDebut" class="form-control"
+							th:value="${seance.heureDebut}"> 
+							<div>
+							
+					</div>
+					<button class="btn btn-outline-secondary offset-md-4" type="submit" style="width:34%;">Enregistrer</button>
+
+
+				</form>
+			</div>
+		</div>
+		</div>
+	</div>
+</body>
+</html>

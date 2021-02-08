@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Login - Gestion Cinema</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous" />
+</head>
+<body>
+	   <div class="container mt-12">
+			
+				<img src="../images/CCM.jpg" alt="image" style="position: absolute; left:9.3%;width:81%;height:90%">
+			
+		</div>
+<div class="container-fluid text-center col-md-10 " >
+   
+    <div  class="card-header text-dark"  style="background-color: lightblue; font-weight:bold" >Cinema Application</div>
+    <form th:action="@{/login}" method="post" style="max-width: 500px; margin: 0 auto; margin-top:15%">
+     
+        <div th:if="${param.error}">
+            <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+        </div>
+         
+        <div class="border border-secondary p-1 rounded" style="font-weight:bold; background-color: #E5E68C;" th:if="${param.logout}">
+            <p class="text-info" style="font-weight:bold; background-color: light;">You have been logged out.</p>
+        </div>
+         
+        <div class="border border-secondary p-3 rounded">
+            <p style="background-color: black; color:white">Access au Gestion Cinema App</p>
+            <p>
+                <input type="text" name="username" class="form-control" placeholder="Username" required autofocus/>
+            </p>
+            <p>
+                <input type="password" name="password" class="form-control" placeholder="Password" required />
+            </p>
+            <p>
+                <input type="checkbox" name="remember-me" />&nbsp;Remember Me
+            </p>
+            <p>
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </p>
+            <a th:href="@{forgot_password}" style="font-weight:bold; color: blue">Forgot your password?</a>
+        </div>
+    </form>      
+</div>
+<footer class="footer fixed-bottom" style="background-color: gray;">
+        <div class="container-fluid" >
+          <nav class="float-left">
+         
+                <a href="https://www.creative-tim.com" style="color: black">
+              &copy;     KML Team</a>
+             
+          </nav>
+          <div class="copyright float-right">
+            
+  Made with <i class="material-icons"  style="color:purple">favorite</i> by KML
+        &copy;
+          </div>
+        </div>
+      </footer>
+</body>
+
+</html>

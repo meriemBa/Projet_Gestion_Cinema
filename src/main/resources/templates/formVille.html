@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="page1">
+
+<head>
+
+<meta charset="utf-8">
+
+<title>Form Categorie</title>
+</head>
+<body>
+	<div layout:fragment="contenu">
+	
+	<div class="container mt-5">
+
+		<div class=" card col-md-6 offset-md-3">
+			<div  class="card-header bg-secondary text-white" th:if="${ville.id==null}">Formulaire
+				d'ajout</div>
+			<div  class="card-header bg-secondary text-white" th:if="${ville.id!=null}">Formulaire
+				de modification</div>
+			<div class="card-body">
+				<form method="post" th:action="@{saveVille}">
+					<div class="form-group">
+						<input type="hidden" name="id" class="form-control"
+							th:value="${ville.id}">
+							 <label class="control-label">Name</label>
+						<input type="text" name="name" class="form-control"
+							th:value="${ville.name}"> 
+							<span th:errors=${ville.name} class="text-danger"></span>
+							<div>
+							<label class="control-label">longitude</label>
+						<input type="text" name="longitude" class="form-control"
+							th:value="${ville.longitude}">
+							</div>
+							 <label
+							class="control-label">latitude</label>
+							 <input type="text"
+							name="latitude" class="form-control"
+							th:value="${ville.latitude}">
+							 <label
+							class="control-label">altitude</label>
+							 <input type="text"
+							name="altitude" class="form-control"
+							th:value="${ville.altitude}">
+							 
+					</div>
+									<button class="btn btn-outline-secondary offset-md-4" type="submit" style="width:34%;">Enregistrer</button>
+
+
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css">
+
+<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container mt-5">
+
+		<div class=" card col-md-6 offset-md-3">
+			<div class="card-header" th:if="${ville.id==null}">Formulaire
+				d'ajout</div>
+			<div class="card-header" th:if="${ville.id!=null}">Formulaire
+				de modification</div>
+			<div class="card-body">
+				<form method="post" th:action="@{saveVille}">
+					<div class="form-group">
+						<input type="hidden" name="id" class="form-control"
+							th:value="${ville.id}">
+							 <label class="control-label">Name</label>
+						<input type="text" name="name" class="form-control"
+							th:value="${ville.name}"> 
+							<label class="control-label">longitude</label>
+						<input type="text" name="longitude" class="form-control"
+							th:value="${ville.longitude}">
+							 <label
+							class="control-label">latitude</label>
+							 <input type="text"
+							name="latitude" class="form-control"
+							th:value="${ville.latitude}">
+							 <label
+							class="control-label">altitude</label>
+							 <input type="text"
+							name="altitude" class="form-control"
+							th:value="${ville.altitude}">
+							 
+					</div>
+					<div class="form-row text-center">
+						<div class="col-12">
+							<button type="submit" th:if="${ville.id==null}"
+								class="btn btn-success">Ajouter</button>
+							<button type="submit" th:if="${ville.id!=null}"
+								class="btn btn-success">modifier</button>
+
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
